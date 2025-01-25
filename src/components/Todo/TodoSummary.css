@@ -1,0 +1,11 @@
+.todo-summary {
+  margin-top: 1rem;
+}
+
+.todo-summary .btn-group {
+  width: 100%;
+}
+
+.todo-summary .badge {
+  vertical-align: middle;
+}

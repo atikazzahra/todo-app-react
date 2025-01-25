@@ -1,0 +1,20 @@
+.gradient-background {
+  background-size: 200% 200%;
+  animation: gradient-animation 0.5s ease;
+  background-position: 0% 100%;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 100%;
+    background-color: #a8d2bf;
+  }
+  50% {
+    background-position: 100% 0;
+    background-color: #a2cfba;
+  }
+  100% {
+    background-position: 100% 0;
+    background-color: white;
+  }
+}
