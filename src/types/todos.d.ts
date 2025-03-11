@@ -3,3 +3,9 @@ export interface TodoSummaryCount {
   COMPLETED: number;
   TODO: number;
 }
+
+export interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}

@@ -1,10 +1,27 @@
+import * as React from "react";
 import "./TodoItem.css";
 import { useRef } from "react";
 
-export default function TodoItem({ item, onItemComplete, onItemDelete }) {
-  const itemRef = useRef(null);
-  const actionComplete = (id) => {
-    itemRef.current.classList.add("gradient-background");
+interface TodoItemProps {
+  item: {
+    id: number;
+    title: string;
+    completed: boolean;
+  };
+  onItemComplete: (id: number) => void;
+  onItemDelete: (id: number) => void;
+}
+
+export default function TodoItem({
+  item,
+  onItemComplete,
+  onItemDelete,
+}: TodoItemProps) {
+  const itemRef = useRef<HTMLLIElement>(null);
+  const actionComplete = (id: number) => {
+    if (itemRef.current) {
+      itemRef.current.classList.add("gradient-background");
+    }
     setTimeout(() => {
       onItemComplete(id);
     }, 500);
@@ -21,6 +38,7 @@ export default function TodoItem({ item, onItemComplete, onItemDelete }) {
           }`}
           disabled={item.completed}
           onClick={() => actionComplete(item.id)}
+          data-testid={`complete-button-${item.id}`}
         >
           <i className="bi bi-check2"></i>
         </button>
@@ -28,6 +46,7 @@ export default function TodoItem({ item, onItemComplete, onItemDelete }) {
           className="btn btn-outline-secondary"
           type="button"
           onClick={() => onItemDelete(item.id)}
+          data-testid={`delete-button-${item.id}`}
         >
           <i className="bi bi-x"></i>
         </button>

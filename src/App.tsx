@@ -1,3 +1,4 @@
+import * as React from "react";
 import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,11 +16,24 @@ import { TODO_STATUS } from "#constant/todo-status";
 import TodoFrom from "#components/Todo/TodoForm";
 import TodoList from "#components/Todo/TodoList";
 import TodoSummary from "#components/Todo/TodoSummary";
+import { TodoSummaryCount } from "#types/todos.d";
+
+interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+interface RootState {
+  todos: {
+    list: Todo[];
+  };
+}
 
 function App() {
-  const [status, setStatus] = useState(TODO_STATUS.all);
-  const todos = useSelector((state) => state.todos.list || {});
-  const summary = todos.reduce(
+  const [status, setStatus] = useState<TODO_STATUS>(TODO_STATUS.all);
+  const todos = useSelector((state: RootState) => state.todos.list || []);
+  const summary: TodoSummaryCount = todos.reduce(
     (acc, e) => {
       acc[TODO_STATUS.all]++;
       if (e.completed) {
@@ -40,9 +54,9 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchTodoAsync());
-  }, []);
+  }, [dispatch]);
 
-  const onChangeNewTodo = (value) => {
+  const onChangeNewTodo = (value: string) => {
     dispatch(setForm(value));
   };
 
@@ -53,11 +67,11 @@ function App() {
     dispatch(submitNewTodoAsync());
   };
 
-  const onItemComplete = (id) => {
+  const onItemComplete = (id: number) => {
     dispatch(completeTodo(id));
   };
 
-  const onItemDelete = (id) => {
+  const onItemDelete = (id: number) => {
     dispatch(removeTodo(id));
   };
 

@@ -5,14 +5,19 @@
       "#*": ["./src/*"]
     },
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   },
   "exclude": ["node_modules", "dist"],
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/tests/components/Todo/TodoFrom.test.js",
-    "src/App.test.js"
+    "src/tests/components/Todo/TodoForm.test.js",
+    "src/App.test.js",
+    "src/tests/components/Todo/TodoList.test.js",
+    "src/tests/components/Todo/TodoItem.test.js",
+    "jest.config.ts"
   ],
   "resolve": {
     "extensions": [".js", ".jsx", ".ts", ".tsx"]

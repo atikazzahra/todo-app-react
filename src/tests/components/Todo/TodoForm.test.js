@@ -1,6 +1,5 @@
-import { describe, expect, test } from "@jest/globals";
-import { fireEvent, render } from "@testing-library/react";
-import TodoFrom from "../../../components/Todo/TodoForm.tsx";
+import { fireEvent, render, screen } from "@testing-library/react";
+import TodoFrom from "#components/Todo/TodoForm.tsx";
 import React from "react";
 
 describe("TodoForm", () => {
@@ -8,7 +7,7 @@ describe("TodoForm", () => {
     const mockOnSubmitHandler = jest.fn();
     const mockOnChangeHandler = jest.fn();
 
-    const { getByTestId, asFragment } = render(
+    const { asFragment } = render(
       <TodoFrom
         onSubmitForm={() => {
           mockOnSubmitHandler();
@@ -19,8 +18,8 @@ describe("TodoForm", () => {
       />
     );
 
-    expect(getByTestId("todo-input")).toHaveValue("");
-    expect(getByTestId("button-add")).toHaveAttribute("disabled");
+    expect(screen.getByTestId("todo-input")).toHaveValue("");
+    expect(screen.getByTestId("button-add")).toHaveAttribute("disabled");
     expect(asFragment()).toMatchSnapshot();
   });
 
@@ -28,7 +27,7 @@ describe("TodoForm", () => {
     const mockOnSubmitHandler = jest.fn();
     const mockOnChangeHandler = jest.fn();
 
-    const { getByTestId } = render(
+    render(
       <TodoFrom
         onSubmitForm={() => {
           mockOnSubmitHandler();
@@ -39,11 +38,11 @@ describe("TodoForm", () => {
       />
     );
 
-    const input = getByTestId("todo-input");
+    const input = screen.getByTestId("todo-input");
     const value = "Testing";
     fireEvent.change(input, { target: { value: value } });
-    expect(getByTestId("todo-input")).toHaveValue(value);
-    expect(getByTestId("button-add")).not.toHaveAttribute("disabled");
+    expect(screen.getByTestId("todo-input")).toHaveValue(value);
+    expect(screen.getByTestId("button-add")).not.toHaveAttribute("disabled");
     expect(mockOnChangeHandler).toHaveBeenCalled();
   });
 });

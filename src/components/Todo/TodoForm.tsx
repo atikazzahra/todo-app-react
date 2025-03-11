@@ -17,7 +17,7 @@ export default function TodoFrom({
 
   useEffect(() => {
     onChangeForm(value);
-  }, [value]);
+  }, [value, onChangeForm]);
 
   const onSubmit = () => {
     onSubmitForm();

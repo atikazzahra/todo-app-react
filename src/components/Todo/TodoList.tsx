@@ -1,7 +1,19 @@
+import * as React from "react";
 import "./TodoList.css";
-import TodoItem from "#components/Todo/TodoItem";
+import TodoItem from "#components/Todo/TodoItem.tsx";
+import { Todo } from "#types/todos.d";
 
-export default function TodoList({ items, onItemComplete, onItemDelete }) {
+interface TodoListProps {
+  items: Todo[];
+  onItemComplete: (id: number) => void;
+  onItemDelete: (id: number) => void;
+}
+
+export default function TodoList({
+  items,
+  onItemComplete,
+  onItemDelete,
+}: TodoListProps) {
   const loadingState = () => (
     <li className="list-group-item d-flex justify-content-center">
       <div className="spinner-border" role="status">
@@ -9,6 +21,7 @@ export default function TodoList({ items, onItemComplete, onItemDelete }) {
       </div>
     </li>
   );
+
   return (
     <div className="todo-list">
       <ul className="list-group">
