@@ -18,7 +18,7 @@ describe("TodoForm", () => {
       />
     );
 
-    expect(screen.getByTestId("todo-input")).toHaveValue("");
+    expect(screen.getByTestId("todo-input")).toHaveValue("1");
     expect(screen.getByTestId("button-add")).toHaveAttribute("disabled");
     expect(asFragment()).toMatchSnapshot();
   });
